@@ -141,7 +141,7 @@ export default function Lightbox({
         >
           <Image
             key={current.id}
-            src={`/photos/${encodeURIComponent(current.filename)}`}
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/photos/${encodeURIComponent(current.filename)}`}
             alt={`ivyの写真 ${formatDate(current.date)}`}
             fill
             className="object-contain animate-fade-in"

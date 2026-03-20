@@ -94,7 +94,7 @@ export default function Gallery({ photos }: GalleryProps) {
                 aria-label={`ivyの写真を開く`}
               >
                 <Image
-                  src={`/photos/${encodeURIComponent(photo.filename)}`}
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/photos/${encodeURIComponent(photo.filename)}`}
                   alt="ivyの写真"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
