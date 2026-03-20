@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FAF8F5;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Photo grid item hover */
+.photo-tile {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.photo-tile:active {
+  transform: scale(0.97);
+}
+
+/* Lightbox overlay */
+.lightbox-overlay {
+  backdrop-filter: blur(2px);
+}
+
+/* Progress bar for slideshow */
+@keyframes progressFill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.progress-bar {
+  transform-origin: left;
+  animation: progressFill 3.5s linear;
+}
