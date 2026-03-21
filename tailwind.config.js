@@ -7,14 +7,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        cream: '#FAF8F5',
+        cream: '#fff9ea',
         bark: {
-          100: '#F5EFE6',
-          200: '#E8D9C5',
-          300: '#D4B896',
-          400: '#B89270',
-          500: '#8B6A3E',
-          600: '#6B4F2D',
+          50:  '#fdf8ef',
+          100: '#f5e8cc',
+          200: '#e8d0a0',
+          300: '#d4b070',
+          400: '#b88a40',
+          500: '#7e5700',
+          600: '#361f1a',
         },
         sage: {
           100: '#EDF2EB',
@@ -25,7 +26,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-nunito)', 'sans-serif'],
+        sans:    ['var(--font-vietnam)', 'sans-serif'],
+        display: ['var(--font-jakarta)', 'sans-serif'],
       },
       animation: {
         'heart-pop': 'heartPop 0.35s ease',

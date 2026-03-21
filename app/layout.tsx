@@ -1,10 +1,17 @@
 import type { Metadata } from 'next';
-import { Nunito } from 'next/font/google';
+import { Plus_Jakarta_Sans, Be_Vietnam_Pro } from 'next/font/google';
 import './globals.css';
 
-const nunito = Nunito({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-nunito',
+  variable: '--font-jakarta',
+  display: 'swap',
+});
+
+const vietnam = Be_Vietnam_Pro({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-vietnam',
   display: 'swap',
 });
 
@@ -24,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={`${nunito.variable} font-sans bg-cream text-gray-800 min-h-screen`}>
+      <body className={`${jakarta.variable} ${vietnam.variable} font-sans bg-cream text-bark-600 min-h-screen`}>
         {children}
       </body>
     </html>

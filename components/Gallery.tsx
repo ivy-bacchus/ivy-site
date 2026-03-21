@@ -15,7 +15,6 @@ export default function Gallery({ photos }: GalleryProps) {
   const [liked, setLiked] = useState<Set<string>>(new Set());
   const [showOnlyLiked, setShowOnlyLiked] = useState(false);
 
-  // Load likes from localStorage
   useEffect(() => {
     try {
       const stored = localStorage.getItem('ivy-likes');
@@ -43,20 +42,19 @@ export default function Gallery({ photos }: GalleryProps) {
     : photos;
 
   const openLightbox = (photo: Photo) => {
-    const originalIndex = photos.indexOf(photo);
-    setActiveIndex(originalIndex);
+    setActiveIndex(photos.indexOf(photo));
   };
 
   return (
     <>
-      {/* Filter bar */}
-      <div className="flex items-center gap-3 px-4 pb-4">
+      {/* Filter chips */}
+      <div className="flex items-center gap-2 px-4 pb-5">
         <button
           onClick={() => setShowOnlyLiked(false)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all ${
             !showOnlyLiked
-              ? 'bg-bark-500 text-white'
-              : 'bg-bark-100 text-bark-600 hover:bg-bark-200'
+              ? 'bg-bark-500 text-white shadow-sm'
+              : 'bg-bark-100 text-bark-500 hover:bg-bark-200'
           }`}
         >
           <Images size={14} />
@@ -64,9 +62,9 @@ export default function Gallery({ photos }: GalleryProps) {
         </button>
         <button
           onClick={() => setShowOnlyLiked(true)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all ${
             showOnlyLiked
-              ? 'bg-rose-400 text-white'
+              ? 'bg-rose-400 text-white shadow-sm'
               : 'bg-rose-50 text-rose-400 hover:bg-rose-100'
           }`}
         >
@@ -77,21 +75,21 @@ export default function Gallery({ photos }: GalleryProps) {
 
       {/* Photo grid */}
       {displayPhotos.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-24 text-gray-400">
-          <Heart size={40} className="mb-3 stroke-gray-300" />
-          <p className="text-sm">まだお気に入りがありません</p>
-          <p className="text-xs mt-1">写真を開いてハートを押してみてね</p>
+        <div className="flex flex-col items-center justify-center py-24 text-bark-300">
+          <Heart size={40} className="mb-3 stroke-bark-200" />
+          <p className="text-sm font-medium">まだお気に入りがありません</p>
+          <p className="text-xs mt-1 text-bark-200">写真を開いてハートを押してみてね</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1 px-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1.5 px-2">
           {displayPhotos.map((photo) => {
             const isLiked = liked.has(photo.id);
             return (
               <button
                 key={photo.id}
                 onClick={() => openLightbox(photo)}
-                className="photo-tile relative aspect-square overflow-hidden rounded-sm bg-bark-100 group"
-                aria-label={`ivyの写真を開く`}
+                className="photo-tile relative aspect-square overflow-hidden rounded-xl bg-bark-100 group hover:scale-[1.02] hover:shadow-md transition-all duration-200"
+                aria-label="ivyの写真を開く"
               >
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/photos/${encodeURIComponent(photo.filename)}`}
@@ -101,13 +99,9 @@ export default function Gallery({ photos }: GalleryProps) {
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   loading="lazy"
                 />
-                {/* Like indicator */}
                 {isLiked && (
-                  <div className="absolute bottom-1.5 right-1.5 pointer-events-none">
-                    <Heart
-                      size={16}
-                      className="fill-rose-400 stroke-rose-400 drop-shadow-sm"
-                    />
+                  <div className="absolute bottom-2 right-2 pointer-events-none">
+                    <Heart size={16} className="fill-rose-400 stroke-rose-400 drop-shadow-sm" />
                   </div>
                 )}
               </button>
@@ -116,7 +110,6 @@ export default function Gallery({ photos }: GalleryProps) {
         </div>
       )}
 
-      {/* Lightbox */}
       {activeIndex !== null && (
         <Lightbox
           photos={photos}
