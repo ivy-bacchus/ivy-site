@@ -92,7 +92,7 @@ export default function Lightbox({
 
   return (
     <div
-      className="lightbox-overlay fixed inset-0 z-50 flex flex-col bg-black/95 animate-fade-in"
+      className="lightbox-overlay fixed inset-0 z-[100] flex flex-col bg-black/95 animate-fade-in"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
