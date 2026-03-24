@@ -73,10 +73,11 @@ export function IvyVineBottomRight() {
   );
 }
 
-export function ChocolateDrop({ className = '' }: { className?: string }) {
+export function ChocolateDrop({ className = '', style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <svg
       className={`pointer-events-none select-none ${className}`}
+      style={style}
       viewBox="0 0 24 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

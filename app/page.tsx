@@ -97,8 +97,8 @@ export default function IvyPage() {
                 <div className="absolute -bottom-3 -left-7 text-secondary/50 animate-float-slow z-10 pointer-events-none" style={{ animationDelay: '1.4s' }}>
                   <PawPrint size={22} />
                 </div>
-                <ChocolateDrop className="absolute top-4 -left-8 w-8 h-10 animate-float-slow z-10" style={{ animationDelay: '0.8s' } as React.CSSProperties} />
-                <ChocolateDrop className="absolute -bottom-6 right-4 w-6 h-8 animate-float z-10" style={{ animationDelay: '2s' } as React.CSSProperties} />
+                <ChocolateDrop className="absolute top-4 -left-8 w-8 h-10 animate-float-slow z-10" style={{ animationDelay: '0.8s' }} />
+                <ChocolateDrop className="absolute -bottom-6 right-4 w-6 h-8 animate-float z-10" style={{ animationDelay: '2s' }} />
                 <HeroSlideshow photos={photos} />
               </div>
             </div>
