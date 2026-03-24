@@ -86,41 +86,48 @@ export default function PhotoStream({ photos }: { photos: Photo[] }) {
           {displayPhotos.map((photo, idx) => {
             const isLiked = liked.has(photo.id);
             const originalIndex = photos.indexOf(photo);
-            // Stagger the second column down slightly like Stitch
             const offsetClass = idx % 2 === 1 ? 'sm:mt-10' : '';
+            // Alternate subtle tilt for polaroid feel
+            const tiltClass = idx % 3 === 0
+              ? 'rotate-[0.8deg]'
+              : idx % 3 === 1
+              ? '-rotate-[0.8deg]'
+              : 'rotate-[0.4deg]';
             return (
               <div
                 key={photo.id}
-                className={`break-inside-avoid group relative cursor-pointer ${offsetClass}`}
+                className={`break-inside-avoid group cursor-pointer transition-all duration-300 animate-pop-in ${offsetClass} ${tiltClass} hover:rotate-0 hover:scale-[1.02] hover:z-10 relative`}
+                style={{ animationDelay: `${Math.min(idx * 70, 560)}ms` }}
                 onClick={() => setActiveIndex(originalIndex)}
               >
-                <div className="bg-surface-container-highest rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={`${BASE}/photos/${encodeURIComponent(photo.filename)}`}
-                    alt="ivyの写真"
-                    className="w-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="p-5">
+                {/* Polaroid card */}
+                <div className="bg-white p-2 pb-8 shadow-md group-hover:shadow-2xl transition-shadow duration-300">
+                  <div className="overflow-hidden bg-surface-container-highest">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`${BASE}/photos/${encodeURIComponent(photo.filename)}`}
+                      alt="ivyの写真"
+                      className="w-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="pt-3 px-1">
                     <div className="flex justify-between items-center">
                       <span className="bg-primary/5 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                         {getMonthLabel(photo.date)}
                       </span>
                       <button
                         onClick={(e) => toggleLike(photo.id, e)}
-                        className="text-secondary hover:scale-125 transition-transform"
+                        className={`hover:animate-wiggle transition-transform ${isLiked ? 'text-coral' : 'text-secondary'}`}
                         aria-label={isLiked ? 'いいね済み' : 'いいね'}
                       >
                         <Heart
                           size={22}
-                          className={isLiked
-                            ? 'fill-secondary stroke-secondary'
-                            : 'stroke-secondary'}
+                          className={isLiked ? 'fill-coral stroke-coral' : 'stroke-secondary'}
                         />
                       </button>
                     </div>
-                    <p className="mt-3 font-medium text-primary text-sm">
+                    <p className="mt-2 font-medium text-on-surface-variant text-sm">
                       {formatDate(photo.date)}
                     </p>
                   </div>

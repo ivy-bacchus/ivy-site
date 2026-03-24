@@ -7,6 +7,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Playful accent colors
+        'coral': '#ff7b54',
+        'candy': '#ffb3c6',
         // Stitch design system colors
         'primary':                    '#361f1a',
         'on-primary':                 '#ffffff',
@@ -61,10 +64,15 @@ module.exports = {
         sans:    ['var(--font-vietnam)', 'Be Vietnam Pro', 'sans-serif'],
       },
       animation: {
-        'heart-pop': 'heartPop 0.35s ease',
-        'fade-in':   'fadeIn 0.2s ease',
-        'slide-up':  'slideUp 0.25s ease',
-        'pulse-slow':'pulseSlow 3s ease-in-out infinite',
+        'heart-pop':   'heartPop 0.35s ease',
+        'fade-in':     'fadeIn 0.2s ease',
+        'slide-up':    'slideUp 0.25s ease',
+        'pulse-slow':  'pulseSlow 3s ease-in-out infinite',
+        'wiggle':      'wiggle 0.5s ease',
+        'float':       'float 3s ease-in-out infinite',
+        'float-slow':  'float 5s ease-in-out infinite',
+        'pop-in':      'popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both',
+        'bounce-fun':  'bounceFun 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
       },
       keyframes: {
         heartPop: {
@@ -83,6 +91,25 @@ module.exports = {
         pulseSlow: {
           '0%, 100%': { opacity: '0.2' },
           '50%':      { opacity: '0.4' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '25%':      { transform: 'rotate(-10deg)' },
+          '75%':      { transform: 'rotate(10deg)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+          '50%':      { transform: 'translateY(-14px) rotate(6deg)' },
+        },
+        popIn: {
+          '0%':   { opacity: '0', transform: 'scale(0.85) translateY(16px)' },
+          '100%': { opacity: '1', transform: 'scale(1) translateY(0px)' },
+        },
+        bounceFun: {
+          '0%':   { transform: 'scale(1)' },
+          '30%':  { transform: 'scale(1.1)' },
+          '60%':  { transform: 'scale(0.96)' },
+          '100%': { transform: 'scale(1)' },
         },
       },
     },

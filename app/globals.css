@@ -9,6 +9,8 @@ html {
 body {
   background-color: #fff9ea;
   color: #1e1c0e;
+  background-image: url("data:image/svg+xml,<svg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'><g fill='%23361f1a' opacity='0.035'><ellipse cx='80' cy='100' rx='22' ry='20'/><ellipse cx='46' cy='58' rx='11' ry='13' transform='rotate(-20 46 58)'/><ellipse cx='114' cy='58' rx='11' ry='13' transform='rotate(20 114 58)'/><ellipse cx='48' cy='82' rx='11' ry='13' transform='rotate(-10 48 82)'/><ellipse cx='112' cy='82' rx='11' ry='13' transform='rotate(10 112 82)'/></g></svg>");
+  background-size: 200px 200px;
 }
 
 /* Hide scrollbar for story highlights */
@@ -29,4 +31,37 @@ body {
 .progress-bar {
   transform-origin: left;
   animation: progressFill 3.5s linear;
+}
+
+/* Floating heart animation for lightbox */
+@keyframes floatHeart {
+  0%   { opacity: 1;   transform: translateY(0)    scale(1); }
+  80%  { opacity: 0.5; transform: translateY(-55px) scale(0.7); }
+  100% { opacity: 0;   transform: translateY(-75px) scale(0.4); }
+}
+.heart-float {
+  animation: floatHeart 0.9s ease-out forwards;
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Performance hint for animated elements */
+.animate-float,
+.animate-float-slow,
+.animate-pop-in {
+  will-change: transform;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-slow,
+  .animate-pop-in,
+  .animate-wiggle,
+  .animate-bounce-fun,
+  .heart-float {
+    animation: none !important;
+  }
+  .photo-tile:active { transform: none; }
 }

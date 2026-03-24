@@ -24,6 +24,7 @@ export default function Lightbox({
   const [isPlaying, setIsPlaying] = useState(false);
   const [progressKey, setProgressKey] = useState(0);
   const [heartAnim, setHeartAnim] = useState(false);
+  const [floatingHearts, setFloatingHearts] = useState<Array<{ id: number; x: number }>>([]);
   const touchStartX = useRef<number | null>(null);
 
   const current = photos[currentIndex];
@@ -84,6 +85,15 @@ export default function Lightbox({
     onToggleLike(current.id);
     setHeartAnim(true);
     setTimeout(() => setHeartAnim(false), 350);
+    // Launch floating hearts
+    const newHearts = [0, 1, 2, 3].map((i) => ({
+      id: Date.now() + i,
+      x: (Math.random() - 0.5) * 64,
+    }));
+    setFloatingHearts((prev) => [...prev, ...newHearts]);
+    setTimeout(() => {
+      setFloatingHearts((prev) => prev.filter((h) => !newHearts.find((n) => n.id === h.id)));
+    }, 1000);
   };
 
   const handleDoubleClick = () => {
@@ -162,19 +172,30 @@ export default function Lightbox({
 
       {/* Bottom bar */}
       <div className="flex items-center justify-between px-6 py-4 shrink-0">
-        {/* Like button */}
-        <button
-          onClick={handleLike}
-          className="flex items-center gap-2 text-white/80 active:scale-90 transition-transform"
-          aria-label={isLiked ? 'いいね済み' : 'いいね'}
-        >
-          <Heart
-            size={28}
-            className={`transition-colors ${heartAnim ? 'animate-heart-pop' : ''} ${
-              isLiked ? 'fill-rose-400 stroke-rose-400' : 'stroke-white/80'
-            }`}
-          />
-        </button>
+        {/* Like button with floating hearts */}
+        <div className="relative">
+          {floatingHearts.map((h) => (
+            <span
+              key={h.id}
+              className="heart-float text-rose-400 text-lg"
+              style={{ left: `calc(14px + ${h.x}px)`, bottom: '100%' }}
+            >
+              ♥
+            </span>
+          ))}
+          <button
+            onClick={handleLike}
+            className="flex items-center gap-2 text-white/80 active:scale-90 transition-transform"
+            aria-label={isLiked ? 'いいね済み' : 'いいね'}
+          >
+            <Heart
+              size={28}
+              className={`transition-colors ${heartAnim ? 'animate-heart-pop' : ''} ${
+                isLiked ? 'fill-rose-400 stroke-rose-400' : 'stroke-white/80'
+              }`}
+            />
+          </button>
+        </div>
 
         {/* Slideshow toggle */}
         <button
