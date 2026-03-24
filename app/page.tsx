@@ -1,6 +1,7 @@
 import { PawPrint, Heart, Camera, Home as HomeIcon, Images, Menu } from 'lucide-react';
 import { photos } from '@/data/photos';
 import PhotoStream from '@/components/PhotoStream';
+import HeroSlideshow from '@/components/HeroSlideshow';
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
@@ -12,7 +13,6 @@ const highlights = [
 ];
 
 export default function IvyPage() {
-  const heroPhoto   = photos[photos.length - 1];
   const latestPhoto = photos[photos.length - 2];
 
   return (
@@ -48,9 +48,6 @@ export default function IvyPage() {
                   World
                 </span>
               </h1>
-              <p className="text-xl text-on-surface-variant max-w-md mx-auto lg:mx-0 font-medium">
-                大好きなポメラニアン ivy の、毎日のきらめく瞬間を集めました。
-              </p>
               <div className="flex justify-center lg:justify-start">
                 <button className="bg-primary text-on-primary px-8 py-4 rounded-full font-bold text-lg hover:scale-105 hover:animate-bounce-fun transition-all active:scale-95 flex items-center gap-2 shadow-lg hover:shadow-xl">
                   See Latest Moments
@@ -72,16 +69,7 @@ export default function IvyPage() {
                 <div className="absolute top-1/3 -right-10 text-primary/25 animate-float z-10 pointer-events-none" style={{ animationDelay: '0.7s' }}>
                   <PawPrint size={16} />
                 </div>
-                {/* Photo count badge */}
-                <div className="absolute -top-2 -left-4 bg-coral text-white text-xs font-black px-2.5 py-1 rounded-full shadow-md rotate-[-12deg] z-20 pointer-events-none">
-                  {photos.length}枚
-                </div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`${BASE}/photos/${encodeURIComponent(heroPhoto.filename)}`}
-                  alt="ivyの写真"
-                  className="w-full h-full object-cover rounded-full shadow-2xl border-[10px] border-white/60"
-                />
+                <HeroSlideshow photos={photos} />
               </div>
             </div>
           </div>
