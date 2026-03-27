@@ -76,9 +76,7 @@ export default function IvyPage() {
                   World
                 </span>
               </h1>
-              <p className="text-xl text-on-surface-variant max-w-md mx-auto lg:mx-0 font-medium">
-                チョコレート色のラブラドール ivy の、毎日のきらめく瞬間を集めました。
-              </p>
+
               <div className="flex justify-center lg:justify-start">
                 <button className="bg-primary text-on-primary px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all active:scale-95 flex items-center gap-2 shadow-lg">
                   See Latest Moments
